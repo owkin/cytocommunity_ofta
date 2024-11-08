@@ -86,8 +86,8 @@ for num_time in range(1, Num_Times + 1):  # Repeat cross-validation multiple tim
         train_dataset = dataset[train_idx]
         test_dataset = dataset[test_idx]
 
-        train_loader = DenseDataLoader(train_dataset, batch_size=MiniBatchSize, shuffle=True)
-        test_loader = DenseDataLoader(test_dataset, batch_size=1)
+        train_loader = DenseDataLoader(train_dataset, batch_size=MiniBatchSize, shuffle=True, pin_memory=True, num_workers=32)
+        test_loader = DenseDataLoader(test_dataset, batch_size=1, pin_memory=True, num_workers=32)
 
         model = Net(dataset.num_features, dataset.num_classes, Embedding_Dimension, Num_TCN, Dropout).to(device)
         optimizer = torch.optim.Adam(model.parameters(), lr=LearningRate, weight_decay=WeightDecay)  # Adjust weight_decay as needed
@@ -116,7 +116,7 @@ for num_time in range(1, Num_Times + 1):  # Repeat cross-validation multiple tim
         np.savetxt(filename6, test_pr, delimiter=',')
 
         #Extract the soft clustering matrix using the trained model of each fold.
-        all_sample_loader = DenseDataLoader(dataset, batch_size=1)
+        all_sample_loader = DenseDataLoader(dataset, batch_size=1, pin_memory=True, num_workers=32)
         EachSample_num = 0
         
         filename_5 = FoldFolderName + "/ModelPrediction.csv"

@@ -66,15 +66,15 @@ def test(loader, model):
 
         pred_info = np.column_stack(
             (
-                np.array(torch.exp(ModelResultPr)),
-                np.array(pred),
-                np.array(data.y.view(-1)),
+                np.array(torch.exp(ModelResultPr).cpu()),
+                np.array(pred.cpu()),
+                np.array(data.y.view(-1).cpu()),
             )
         )
         pr_Table = np.row_stack((pr_Table, pred_info))
         
         # Collect predictions and labels for AUC calculation
-        all_preds.extend(torch.exp(ModelResultPr)[:, 1].detach().cpu().numpy())  # Assuming binary classification
+        all_preds.extend(torch.exp(ModelResultPr.cpu())[:, 1].detach().cpu().numpy())  # Assuming binary classification
         all_labels.extend(data.y.view(-1).detach().cpu().numpy())
 
     # Calculate AUC
