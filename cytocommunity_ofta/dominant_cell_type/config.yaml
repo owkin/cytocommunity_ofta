@@ -1,0 +1,15 @@
+graph:
+  neighbors_order: 1
+  Image_Name: ["CH_B_004b_vbu", "CH_B_006b_vis", "CH_B_010a_vis"]
+
+hyperparameters:
+  Num_TCN: 2
+  Num_Run: 3
+  Num_Epoch: 500
+  Embedding_Dimension: 128
+  LearningRate: 0.01
+  MiniBatchSize: 16
+  beta: 1
+  WeightDecay: 0
+  Dropout: 0
+

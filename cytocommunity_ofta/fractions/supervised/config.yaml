@@ -1,0 +1,11 @@
+graph:
+  neighbors_order: 1
+hyperparameters:
+  Embedding_Dimension: 128
+  LearningRate: 0.01
+  MiniBatchSize: 16
+  Num_Epoch: 50
+  Num_Folds: 5
+  Num_TCN: 9
+  Num_Times: 3
+  beta: 1
